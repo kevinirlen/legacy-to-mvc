@@ -1,0 +1,54 @@
+version: '3'
+services:
+  # Nginx server configuration
+  web:
+    image: nginx:1.17
+    container_name: 'legacy-webserver'
+    depends_on:
+      - "docker-mysql"
+      - php
+    links:
+      - "docker-mysql"
+      - php
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx:/etc/nginx/conf.d/
+    ports:
+      - "8888:80"
+
+  # Php-fpm configuration
+  php:
+    build:
+      context: docker/php
+      dockerfile: Dockerfile
+#    image: php:7.4-fpm
+    container_name: 'legacy-php'
+    volumes:
+      - ./:/var/www/html
+      - ./php:/usr/local/etc/php/php.ini
+
+  # Mysql configuration
+  docker-mysql:
+    image: mysql:5.7
+    container_name: docker-mysql-legacy
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: j4w>t9T+`h#/+W/a
+      MYSQL_DATABASE: legacy
+      MYSQL_USER: legacy
+      MYSQL_PASSWORD: J"@MM4s2fZc~FB+r
+    ports:
+      - "3308:3306"
+    volumes:
+      - /docker/dbdata_legacy:/var/lib/mysql
+
+  phpmyadmin:
+    container_name: docker-mysql-phpmyadmin
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8081:80
+    environment:
+      - PMA_ARBITRARY=1
+volumes:
+  dbdata_legacy:

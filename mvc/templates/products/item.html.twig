@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <p><a href="/products">Back to product list</a></p>
+
+    <div class="container">
+        <div class="product-details">
+                <img src="{{ product.image }}" alt="Product 1">
+            <h5 class="text-danger">
+                {{ product.title }}
+            </h5>
+            <p>{{ product.description }}</p>
+            <p><strong>Price: Rs {{ product.price }}</strong></p>
+        </div>
+    </div>
+{% endblock %}
+

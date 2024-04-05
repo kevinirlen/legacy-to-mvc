@@ -1,0 +1,22 @@
+{
+    "name": "bocasay/mvc",
+    "description": "PHP Makeover: Turning Procedural Pains into MVC Gains",
+    "type": "library",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Ian Irlen"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {
+        "symfony/http-foundation": "^5.4",
+        "symfony/http-kernel": "^5.4",
+        "twig/twig": "^3.8",
+        "php-di/php-di": "6.0"
+    }
+}
